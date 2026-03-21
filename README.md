@@ -23,6 +23,14 @@ Replaces the Q-Table with a **Deep Q-Network (DQN)** built in PyTorch. States ar
 - Trained with MSE loss and Adam optimizer
 - Epsilon-greedy exploration with decay
 
+### [ddqn_intro.py](ddqn_intro.py)
+Extends DQN to **Double DQN (DDQN)** by decoupling action selection from action evaluation using two networks.
+
+- Same custom FrozenLake environment and network architecture as DQN
+- **Policy network** selects the best next action; **target network** evaluates its Q-value — reduces overestimation bias
+- Target network updated via periodic hard copy (`hard_update`) every 100 steps
+- Epsilon-greedy exploration with decay
+
 ## Requirements
 
 ```
@@ -43,4 +51,5 @@ pip install gymnasium numpy torch
 python pytorch_intro.py
 python gymnasium_qtables_intro.py
 python dqn_intro.py
+python ddqn_intro.py
 ```
