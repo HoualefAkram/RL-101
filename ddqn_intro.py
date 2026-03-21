@@ -72,8 +72,8 @@ for epoche in range(epoches):
 
         # train the network (DDQN)
         # 1- policy takes the state and gives best action (already done above), gives new_state
-        # 2- policy takes new_state and find the optimal q_val. BUT it will not use, it needs to only know what action it is
-        # 3- Target network takes new_state, gets the Q-Values of the 4 actions, it doesnt pick the best, it picks the index from the previous step
+        # 2- policy takes new_state and finds the optimal q_val. BUT it will not use it, it needs to only know what action it is.
+        # 3- Target network takes new_state, gets the Q-Values of the 4 actions, it doesnt pick the best one, it picks the index from the previous step
 
         # For DQN (with target network). Note: This isnt DDQN, just target net extension:
         # 1- policy takes the state and gives best action (already done above), gives new_state
