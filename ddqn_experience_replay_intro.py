@@ -7,6 +7,7 @@ import torch
 import numpy as np
 import torch.optim as optim
 from collections import deque
+import torch.nn.functional as F
 
 env = FrozenLake()
 
@@ -89,9 +90,12 @@ for epoche in range(epoches):
         if len(transitions) >= batch_size:
             batch = random.sample(transitions, batch_size)
             b_states, b_actions, b_rewards, b_new_states, b_dones = zip(*batch)
-            b_new_states_encoded = [_onehot_tensor(s) for s in b_new_states]
-            b_states_tensor = torch.cat([_onehot_tensor(s) for s in b_states])
-            b_new_states_tensor = torch.cat(b_new_states_encoded)
+
+            b_states_t = torch.tensor(b_states, dtype=torch.int64)
+            b_new_states_t = torch.tensor(b_new_states, dtype=torch.int64)
+
+            b_states_tensor = F.one_hot(b_states_t, num_classes=16).float()
+            b_new_states_tensor = F.one_hot(b_new_states_t, num_classes=16).float()
 
             with torch.no_grad():
                 # 32 best action IDs
