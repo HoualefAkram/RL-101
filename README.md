@@ -31,6 +31,14 @@ Extends DQN to **Double DQN (DDQN)** by decoupling action selection from action 
 - Target network updated via periodic hard copy (`hard_update`) every 100 steps
 - Epsilon-greedy exploration with decay
 
+### [ddqn_experience_replay_intro.py](ddqn_experience_replay_intro.py)
+Adds **Experience Replay** to DDQN for more stable and sample-efficient training.
+
+- Stores transitions `(state, action, reward, new_state, done)` in a replay buffer (`deque` with max 10,000 entries)
+- At each step, samples a random mini-batch of 32 transitions — breaks temporal correlations and reuses past experience
+- DDQN target computed via `gather` on batched tensors for efficiency
+- Target network hard-updated every 100 gradient steps (not environment steps)
+
 ## Requirements
 
 ```
@@ -52,4 +60,5 @@ python pytorch_intro.py
 python gymnasium_qtables_intro.py
 python dqn_intro.py
 python ddqn_intro.py
+python ddqn_experience_replay_intro.py
 ```
