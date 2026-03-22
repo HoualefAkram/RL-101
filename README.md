@@ -39,18 +39,26 @@ Adds **Experience Replay** to DDQN for more stable and sample-efficient training
 - DDQN target computed via `gather` on batched tensors for efficiency
 - Target network hard-updated every 100 gradient steps (not environment steps)
 
+### [ddqn_experience_replay_logger.py](ddqn_experience_replay_logger.py)
+Adds **TensorBoard logging** to the DDQN + Experience Replay agent for training visibility.
+
+- Logs per-episode metrics: episode length, total reward, average max Q-value, epsilon, and average loss
+- Uses `SummaryWriter` from `torch.utils.tensorboard`, writing to `runs/FrozenLake_DDQN`
+- Same architecture, replay buffer, and DDQN update logic as `ddqn_experience_replay_intro.py`
+
 ## Requirements
 
 ```
 gymnasium
 numpy
 torch
+tensorboard
 ```
 
 Install with:
 
 ```bash
-pip install gymnasium numpy torch
+pip install gymnasium numpy torch tensorboard
 ```
 
 ## Running
@@ -61,4 +69,6 @@ python gymnasium_qtables_intro.py
 python dqn_intro.py
 python ddqn_intro.py
 python ddqn_experience_replay_intro.py
+python ddqn_experience_replay_logger.py
+tensorboard --logdir=runs
 ```
