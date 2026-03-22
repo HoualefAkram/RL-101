@@ -28,9 +28,7 @@ class QNetwork(nn.Module):
 
 
 def _onehot_tensor(state_num: int):
-    onehot = np.zeros(16)
-    onehot[state_num] = 1.0
-    return torch.tensor(onehot, dtype=torch.float32).unsqueeze(0)
+    return F.one_hot(torch.tensor([state_num]), num_classes=16).float()
 
 
 def hard_update(target_net, policy_net):
@@ -131,7 +129,7 @@ for epoche in range(epoches):
                 counter = 0
                 hard_update(target_network, policy_network)
 
-    epsilon = max(min_epsilon, epsilon * decay_val)
+        epsilon = max(min_epsilon, epsilon * decay_val)
 
 
 # Test the agent
