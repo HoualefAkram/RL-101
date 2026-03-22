@@ -127,7 +127,7 @@ for epoche in range(epoches):
                 counter = 0
                 hard_update(target_network, policy_network)
 
-        epsilon = max(min_epsilon, epsilon * decay_val)
+    epsilon = max(min_epsilon, epsilon * decay_val)
 
 
 # Test the agent
